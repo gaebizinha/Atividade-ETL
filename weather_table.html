@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather Data</title>
+</head>
+
+<body>
+
+    <h1>Weather Data</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Ingestion Date</th>
+            <th>Data Type</th>
+            <th>valores</th>
+            <th>uso</th>
+        </tr>
+        {% for entry in weather_data %}
+        <tr>
+            <td>{{ entry.id }}</td>
+            <td>{{ entry.data_ingestao }}</td>
+            <td>{{ entry.data_tipo }}</td>
+            <td>{{ entry.valores }}</td>
+            <td>{{ entry.uso }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+
+</html>
