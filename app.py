@@ -7,15 +7,19 @@ import json
 import requests
 import pytz
 
+
+
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+
 db = SQLAlchemy(app)
 
 brasil_timezone = pytz.timezone('America/Sao_Paulo')
 
 def get_brasil_datetime():
-    return datetime.now(brasil_timezone)
+   return datetime.now(brasil_timezone).strftime("%Y-%m-%d %H:%M:%S")
+
 
 class WeatherData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,13 +31,14 @@ class WeatherData(db.Model):
 def funcao_etl():
     
     api_key = 'd13a18996616513b72952410f7ecd170'
-    cidades = ['São Paulo', 'Rio de Janeiro', 'Brasília']
+    cidades = ['São Paulo', 'Acre', 'Rio Grande do Sul', 'Alagoas', 'Brasília']
     
     lista_dados_climaticos = []  
     
     for city in cidades:
         url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
         response = requests.get(url)
+        print(response.json())
 
         if response.status_code == 200:
             weather_data = response.json()
