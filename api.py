@@ -1,4 +1,7 @@
-# python -m pip install Flask
+# pip install Flask
+# pip install flask_sqlalchemy
+# pip install datetime
+# pip install pytz
 
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
