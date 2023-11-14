@@ -34,7 +34,7 @@ class WeatherData(db.Model):
 def funcao_etl():
    
    api_key = 'd13a18996616513b72952410f7ecd170'
-   cidades = ['São Paulo', 'Brasília']
+   cidades = ['São Paulo', 'Brasília', 'Alagoas', 'Sergipe']
    
    lista_dados_climaticos = [] 
    
