@@ -9,6 +9,9 @@ from datetime import datetime
 import json
 import requests
 import pytz
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -34,14 +37,19 @@ def funcao_etl():
    cidades = ['São Paulo', 'Brasília']
    
    lista_dados_climaticos = [] 
+   
 
    for city in cidades:
        url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
-       response = requests.get(url)
+       try:
+        response = requests.get(url)
+        response.raise_for_status() # Raises a HTTPError if the status is 4xx, 5xx
+       except requests.exceptions.RequestException as err:
+        logging.error(f"Request error: {err}")
+        continue
 
-       print(f'Response status code: {response.status_code}')
-       print(f'Response content: {response.json()}')
-
+       logging.debug(f'Response status code: {response.status_code}')
+       logging.debug(f'Response content: {response.json()}')
        if response.status_code == 200:
            weather_data = response.json()
            
@@ -65,8 +73,11 @@ def funcao_etl():
 
 @app.route('/weather_data', methods=['GET'])
 def display_weather_data():
-   weather_data = WeatherData.query.all()
-   return render_template('weather_table.html', weather_data=weather_data)
+  weather_data = WeatherData.query.all()
+  etl_data = funcao_etl()
+  return render_template('weather_table.html', weather_data=weather_data, etl_data=etl_data)
+
+
 
 if __name__ == '__main__':
     with app.app_context():
