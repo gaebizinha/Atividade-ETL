@@ -2,20 +2,73 @@
 <html>
 
 <head>
-    <title>Weather Data</title>
+    <title>Atividade API</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+            text-align: center;
+            margin: 0;
+        }
+
+        h1 {
+            color: #000000;
+        }
+
+        table {
+            width: 95%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #bc91c9;
+            color: white;
+        }
+
+        .text-button {
+            color: #ffffff;
+            font-size: 14px;
+            background-color: #10c6c6;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 200px;
+            border: none;
+            padding: 10px;
+        }
+
+        .alinhamento {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin-top: 25px;
+        }
+    </style>
+
 </head>
 
 <body>
-
-    <h1>Weather Data</h1>
-
-    <table border="1">
+    <div class="alinhamento">
+        <h1>Atividade API</h1>
+        <!-- <button id="voltarInicio" class="text-button">Voltar</button> -->
+    </div>
+    <table>
         <tr>
             <th>ID</th>
-            <th>Ingestion Date</th>
-            <th>Data Type</th>
-            <th>valores</th>
-            <th>uso</th>
+            <th>Data da ingestão</th>
+            <th>Tipo dos dados</th>
+            <th>Valores</th>
+            <th>Uso</th>
         </tr>
         {% for entry in weather_data %}
         <tr>
@@ -27,7 +80,6 @@
         </tr>
         {% endfor %}
     </table>
-
 
 </body>
 
